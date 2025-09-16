@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexfy Solutions | Geração de Leads Inteligentes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nexfy-orange': '#FF6B00',
+                        'nexfy-orange-light': '#FF8A3D',
+                        'nexfy-dark': '#1A1A1A',
+                        'nexfy-gray': '#333333',
+                    },
+                    fontFamily: {
+                        'sans': ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0F0F0F;
+            color: #FFFFFF;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #FF6B00 0%, #FF8A3D 100%);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #FF6B00 0%, #FF8A3D 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 107, 0, 0.3);
+        }
+        
+        .btn-secondary {
+            border: 2px solid #FF6B00;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(255, 107, 0, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .service-card {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 0, 0.2);
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #FF6B00;
+            box-shadow: 0 10px 30px rgba(255, 107, 0, 0.2);
+        }
+        
+        .value-card {
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #FF6B00;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .jaguar-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF6B00' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Logo styling - MODIFICADO: Aumentado o tamanho da logo no topo para 120px x 120px */
+        .logo-container {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+        
+        .logo-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        /* Estilo específico para a logo na seção hero - MODIFICADO: Ajustado para o mesmo tamanho da terceira imagem */
+        .hero-logo {
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: contain;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="fixed w-full bg-nexfy-dark bg-opacity-90 backdrop-blur-md z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo - Substituída com a logo fornecida e aumentada -->
+                <a href="#" class="flex items-center">
+                    <div class="logo-container mr-3">
+                        <img src="https://i.imgur.com/TKBphET.png" alt="Nexfy Logo" class="logo-image">
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold"><span class="text-nexfy-orange">Nexfy</span> Solutions</h1>
+                        <p class="text-xs text-gray-400">Geração de Leads Inteligentes</p>
+                    </div>
+                </a>
+                
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-nexfy-orange transition-colors">Home</a>
+                    <a href="#quem-somos" class="nav-link text-white hover:text-nexfy-orange transition-colors">Quem Somos</a>
+                    <a href="#servicos" class="nav-link text-white hover:text-nexfy-orange transition-colors">Serviços</a>
+                    <a href="#como-funciona" class="nav-link text-white hover:text-nexfy-orange transition-colors">Como Funciona</a>
+                    <a href="#resultados" class="nav-link text-white hover:text-nexfy-orange transition-colors">Resultados</a>
+                    <a href="#contato" class="btn-primary px-6 py-2 rounded-full text-white font-medium">Fale Conosco</a>
+                </nav>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-4/5 bg-nexfy-dark z-50 p-6">
+            <div class="flex justify-end">
+                <button id="close-menu-button" class="text-white focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6 mt-10">
+                <a href="#home" class="text-white hover:text-nexfy-orange transition-colors text-lg">Home</a>
+                <a href="#quem-somos" class="text-white hover:text-nexfy-orange transition-colors text-lg">Quem Somos</a>
+                <a href="#servicos" class="text-white hover:text-nexfy-orange transition-colors text-lg">Serviços</a>
+                <a href="#como-funciona" class="text-white hover:text-nexfy-orange transition-colors text-lg">Como Funciona</a>
+                <a href="#resultados" class="text-white hover:text-nexfy-orange transition-colors text-lg">Resultados</a>
+                <a href="#contato" class="btn-primary px-6 py-2 rounded-full text-white font-medium text-center mt-4">Fale Conosco</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section - MODIFICADO: Aumentado o padding-top para 160px para garantir que o conteúdo não fique embaixo do cabeçalho -->
+    <section id="home" class="pt-40 pb-20 jaguar-pattern">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                        Leads <span class="text-nexfy-orange">Inteligentes</span> para Resultados <span class="text-nexfy-orange">Reais</span>
+                    </h1>
+                    <p class="text-lg text-gray-300 mb-8">
+                        Somos especialistas em geração de leads qualificados e operação completa de ativação. Tecnologia, dados e agilidade para escalar suas vendas com previsibilidade.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#servicos" class="btn-primary px-8 py-3 rounded-full text-white font-medium text-center">
+                            Conheça Nossos Serviços
+                        </a>
+                        <a href="#contato" class="btn-secondary px-8 py-3 rounded-full text-white font-medium text-center">
+                            Fale com um Especialista
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative">
+                        <div class="absolute -top-10 -left-10 w-40 h-40 bg-nexfy-orange rounded-full filter blur-3xl opacity-20 animate-pulse"></div>
+                        <div class="relative z-10 animate-float flex justify-center">
+                            <!-- Substituída a imagem flutuante pela logo e ajustada para o mesmo tamanho da terceira imagem -->
+                            <img src="https://i.imgur.com/TKBphET.png" alt="Nexfy Logo" class="hero-logo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-20 grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="bg-nexfy-dark p-6 rounded-xl border border-gray-800 hover:border-nexfy-orange transition-all">
+                    <div class="text-nexfy-orange text-4xl mb-4">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Precisão nos dados</h3>
+                    <p class="text-gray-400">Encontramos o cliente certo para sua oferta.</p>
+                </div>
+                
+                <div class="bg-nexfy-dark p-6 rounded-xl border border-gray-800 hover:border-nexfy-orange transition-all">
+                    <div class="text-nexfy-orange text-4xl mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Velocidade de ativação</h3>
+                    <p class="text-gray-400">Do lead ao agendamento em poucos dias.</p>
+                </div>
+                
+                <div class="bg-nexfy-dark p-6 rounded-xl border border-gray-800 hover:border-nexfy-orange transition-all">
+                    <div class="text-nexfy-orange text-4xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Escalabilidade real</h3>
+                    <p class="text-gray-400">Dezenas ou centenas de oportunidades mensais.</p>
+                </div>
+                
+                <div class="bg-nexfy-dark p-6 rounded-xl border border-gray-800 hover:border-nexfy-orange transition-all">
+                    <div class="text-nexfy-orange text-4xl mb-4">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Tecnologia que vende</h3>
+                    <p class="text-gray-400">IA, automação e estratégia para gerar resultado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="quem-somos" class="py-20 bg-nexfy-dark">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center gap-12">
+                <div class="md:w-1/2 mb-10 md:mb-0">
+                    <div class="relative">
+                        <div class="absolute -top-5 -left-5 w-72 h-72 bg-nexfy-orange rounded-full filter blur-3xl opacity-10"></div>
+                        <img src="https://i.imgur.com/TKBphET.png" alt="Nexfy Logo" class="relative z-10 w-full max-w-md mx-auto">
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2">
+                    <div class="inline-block px-4 py-1 bg-nexfy-orange bg-opacity-10 rounded-full text-nexfy-orange font-medium mb-4">Quem Somos</div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Especialistas em <span class="text-nexfy-orange">Geração de Leads</span> Inteligentes</h2>
+                    <p class="text-gray-300 mb-6">
+                        A Nexfy Solutions é especialista em geração de leads inteligentes. Atuamos com duas frentes principais: a venda de leads qualificados prontos para contato e a operação completa de ativação com disparos no WhatsApp, SDRs e atendimento automatizado com IA.
+                    </p>
+                    <p class="text-gray-300 mb-8">
+                        Nosso diferencial está na entrega de resultados reais, com tecnologia, dados e agilidade. Somos o parceiro ideal para escalar vendas com previsibilidade e performance.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange text-xl">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Dados Precisos</h4>
+                                <p class="text-gray-400 text-sm">Segmentação avançada</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange text-xl">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">Resultados Reais</h4>
+                                <p class="text-gray-400 text-sm">Foco em conversão</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services Section -->
+    <section id="servicos" class="py-20 bg-black jaguar-pattern">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-block px-4 py-1 bg-nexfy-orange bg-opacity-10 rounded-full text-nexfy-orange font-medium mb-4">Nossos Serviços</div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">O que <span class="text-nexfy-orange">fazemos</span></h2>
+                <p class="text-gray-300">
+                    Oferecemos soluções completas para geração e ativação de leads, com foco em resultados mensuráveis e escaláveis para seu negócio.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-nexfy-dark rounded-xl overflow-hidden">
+                    <div class="h-3 gradient-bg"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-6">
+                            <i class="fas fa-user-check text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Leads Qualificados</h3>
+                        <p class="text-gray-300 mb-6">
+                            Base segmentada por perfil ideal de cliente (ICP), com leads prontos para contato comercial.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <div class="text-nexfy-orange">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <p>Base segmentada por perfil ideal de cliente (ICP)</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="text-nexfy-orange">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <p>Leads prontos para contato comercial</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="text-nexfy-orange">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <p>Entrega mínima de 100 leads por campanha</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-gray-400">Valor personalizado</span>
+                            </div>
+                            <a href="#contato" class="btn-primary px-6 py-2 rounded-full text-white font-medium">Solicitar Proposta</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card bg-nexfy-dark rounded-xl overflow-hidden">
+                    <div class="h-3 gradient-bg"></div>
+                    <div class="p-8">
+                        <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-6">
+                            <i class="fas fa-rocket text-2xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Operação de Ativação Completa</h3>
+                        <p class="text-gray-300 mb-6">
+                            Solução end-to-end com disparos automatizados, SDRs humanos e atendimento híbrido com IA.
+                        </p>
+                        
+                        <div class="space-y-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <div class="text-nexfy-orange">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <p>Disparos automatizados no WhatsApp</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="text-nexfy-orange">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <p>SDRs humanos e atendimento híbrido com IA</p>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="text-nexfy-orange">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <p>Segmentação, nutrição e agendamento de oportunidades</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-gray-400">Valor personalizado</span>
+                            </div>
+                            <a href="#contato" class="btn-primary px-6 py-2 rounded-full text-white font-medium">Solicitar Proposta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- How It Works Section -->
+    <section id="como-funciona" class="py-20 bg-nexfy-dark">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-block px-4 py-1 bg-nexfy-orange bg-opacity-10 rounded-full text-nexfy-orange font-medium mb-4">Processo</div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Como <span class="text-nexfy-orange">Funciona</span></h2>
+                <p class="text-gray-300">
+                    Nossa metodologia é baseada em dados, tecnologia e expertise para entregar leads qualificados e prontos para conversão.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Step 1 -->
+                <div class="relative">
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl font-bold">1</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3">Análise de Perfil</h3>
+                        <p class="text-gray-400">Identificamos seu cliente ideal (ICP) e definimos critérios de segmentação.</p>
+                    </div>
+                    
+                    <!-- Connector -->
+                    <div class="hidden md:block absolute top-8 left-full w-full h-1 bg-nexfy-orange bg-opacity-30 -z-10 transform -translate-x-8"></div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="relative">
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl font-bold">2</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3">Prospecção Inteligente</h3>
+                        <p class="text-gray-400">Utilizamos IA e big data para encontrar leads com alta propensão de conversão.</p>
+                    </div>
+                    
+                    <!-- Connector -->
+                    <div class="hidden md:block absolute top-8 left-full w-full h-1 bg-nexfy-orange bg-opacity-30 -z-10 transform -translate-x-8"></div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="relative">
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl font-bold">3</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3">Ativação Multicanal</h3>
+                        <p class="text-gray-400">Engajamos os leads via WhatsApp, email e ligações com abordagem personalizada.</p>
+                    </div>
+                    
+                    <!-- Connector -->
+                    <div class="hidden md:block absolute top-8 left-full w-full h-1 bg-nexfy-orange bg-opacity-30 -z-10 transform -translate-x-8"></div>
+                </div>
+                
+                <!-- Step 4 -->
+                <div>
+                    <div class="w-16 h-16 rounded-full gradient-bg flex items-center justify-center mb-6 mx-auto">
+                        <span class="text-2xl font-bold">4</span>
+                    </div>
+                    <div class="text-center">
+                        <h3 class="text-xl font-bold mb-3">Conversão e Análise</h3>
+                        <p class="text-gray-400">Entregamos oportunidades qualificadas e relatórios detalhados de performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Results Section -->
+    <section id="resultados" class="py-20 bg-black jaguar-pattern">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-block px-4 py-1 bg-nexfy-orange bg-opacity-10 rounded-full text-nexfy-orange font-medium mb-4">Resultados</div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Nossos <span class="text-nexfy-orange">Resultados</span></h2>
+                <p class="text-gray-300">
+                    Conheça alguns dos resultados que já entregamos para nossos clientes em diferentes segmentos.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Case 1 -->
+                <div class="bg-nexfy-dark rounded-xl p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange text-2xl">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">Setor Imobiliário</h3>
+                            <p class="text-gray-400">Construtora Nacional</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Leads Gerados</span>
+                            <span class="font-bold">1.200+</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Taxa de Conversão</span>
+                            <span class="font-bold">8.7%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">ROI</span>
+                            <span class="font-bold text-nexfy-orange">12x</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-700 pt-6">
+                        <p class="italic text-gray-400">
+                            "A Nexfy transformou nossa prospecção. Conseguimos fechar mais negócios em 3 meses do que no semestre anterior."
+                        </p>
+                        <p class="mt-4 font-medium">Tarraf</p>
+                    </div>
+                </div>
+                
+                <!-- Case 2 -->
+                <div class="bg-nexfy-dark rounded-xl p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange text-2xl">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">Educação</h3>
+                            <p class="text-gray-400">Grupo Educacional</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Leads Gerados</span>
+                            <span class="font-bold">3.500+</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Taxa de Conversão</span>
+                            <span class="font-bold">6.2%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">ROI</span>
+                            <span class="font-bold text-nexfy-orange">8.5x</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-700 pt-6">
+                        <p class="italic text-gray-400">
+                            "A qualidade dos leads e a velocidade de ativação nos permitiram bater a meta de matrículas em tempo recorde."
+                        </p>
+                        <p class="mt-4 font-medium">Flavio, Gerente de Marketing</p>
+                    </div>
+                </div>
+                
+                <!-- Case 3 -->
+                <div class="bg-nexfy-dark rounded-xl p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange text-2xl">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl">Saúde</h3>
+                            <p class="text-gray-400">Rede de Clínicas</p>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Leads Gerados</span>
+                            <span class="font-bold">850+</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">Taxa de Conversão</span>
+                            <span class="font-bold">11.3%</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-gray-300">ROI</span>
+                            <span class="font-bold text-nexfy-orange">15x</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-700 pt-6">
+                        <p class="italic text-gray-400">
+                            "A segmentação precisa e o atendimento híbrido com IA aumentaram significativamente nossa taxa de agendamentos."
+                        </p>
+                        <p class="mt-4 font-medium">Aline, CEO</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-nexfy-dark rounded-xl p-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-4xl font-bold text-nexfy-orange mb-2">15k+</div>
+                        <p class="text-gray-300">Leads Gerados Mensalmente</p>
+                    </div>
+                    
+                    <div>
+                        <div class="text-4xl font-bold text-nexfy-orange mb-2">98%</div>
+                        <p class="text-gray-300">Precisão nos Dados</p>
+                    </div>
+                    
+                    <div>
+                        <div class="text-4xl font-bold text-nexfy-orange mb-2">7.8%</div>
+                        <p class="text-gray-300">Taxa Média de Conversão</p>
+                    </div>
+                    
+                    <div>
+                        <div class="text-4xl font-bold text-nexfy-orange mb-2">10x</div>
+                        <p class="text-gray-300">ROI Médio para Clientes</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="py-20 bg-nexfy-dark">
+        <div class="container mx-auto px-6">
+            <div class="bg-gradient-to-r from-nexfy-orange to-nexfy-orange-light rounded-2xl p-8 md:p-12">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="md:w-2/3 mb-8 md:mb-0">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                            Pronto para escalar suas vendas?
+                        </h2>
+                        <p class="text-white text-opacity-90 text-lg">
+                            Agende uma consulta gratuita e descubra como podemos ajudar seu negócio a crescer com leads qualificados.
+                        </p>
+                    </div>
+                    <div>
+                        <a href="#contato" class="inline-block px-8 py-4 bg-white text-nexfy-orange font-bold rounded-full hover:bg-opacity-90 transition-all transform hover:-translate-y-1">
+                            Falar com Especialista
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contato" class="py-20 bg-black jaguar-pattern">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-block px-4 py-1 bg-nexfy-orange bg-opacity-10 rounded-full text-nexfy-orange font-medium mb-4">Contato</div>
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Fale com a <span class="text-nexfy-orange">Nexfy</span></h2>
+                <p class="text-gray-300">
+                    Entre em contato para uma consultoria gratuita e descubra como podemos ajudar seu negócio a crescer.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <form id="contact-form" class="space-y-6" action="mailto:adm@nexfysolutions.com.br" method="post" enctype="text/plain">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-gray-400 mb-2">Nome</label>
+                                <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-nexfy-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-nexfy-orange">
+                            </div>
+                            <div>
+                                <label for="company" class="block text-sm font-medium text-gray-400 mb-2">Empresa</label>
+                                <input type="text" id="company" name="company" class="w-full px-4 py-3 bg-nexfy-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-nexfy-orange">
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-nexfy-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-nexfy-orange">
+                            </div>
+                            <div>
+                                <label for="phone" class="block text-sm font-medium text-gray-400 mb-2">Telefone</label>
+                                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 bg-nexfy-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-nexfy-orange">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="service" class="block text-sm font-medium text-gray-400 mb-2">Serviço de Interesse</label>
+                            <select id="service" name="service" class="w-full px-4 py-3 bg-nexfy-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-nexfy-orange">
+                                <option value="">Selecione uma opção</option>
+                                <option value="leads">Leads Qualificados</option>
+                                <option value="activation">Operação de Ativação</option>
+                                <option value="both">Ambos os Serviços</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-400 mb-2">Mensagem</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-nexfy-dark border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-nexfy-orange"></textarea>
+                        </div>
+                        
+                        <div>
+                            <button type="submit" class="w-full btn-primary py-3 rounded-lg text-white font-medium">
+                                Enviar Mensagem
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div id="form-success" class="hidden mt-6 p-4 bg-green-900 bg-opacity-30 border border-green-500 rounded-lg text-center">
+                        <p class="text-green-400">Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-nexfy-dark rounded-xl p-8 mb-8">
+                        <h3 class="text-2xl font-bold mb-6">Informações de Contato</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange text-xl">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Telefone</h4>
+                                    <a href="tel:+5518997053072" class="text-gray-300 hover:text-nexfy-orange transition-colors">(18) 99705-3072</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange text-xl">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Email</h4>
+                                    <a href="mailto:adm@nexfysolutions.com.br" class="text-gray-300 hover:text-nexfy-orange transition-colors">adm@nexfysolutions.com.br</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange text-xl">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold">Endereço</h4>
+                                    <p class="text-gray-300">Rua Ribeiro de Barros 457, CEP 16200071</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-nexfy-dark rounded-xl p-8">
+                        <h3 class="text-2xl font-bold mb-6">Horário de Atendimento</h3>
+                        
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Segunda - Sexta</span>
+                                <span class="font-bold">9:00 - 18:00</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Sábado</span>
+                                <span class="font-bold">10:00 - 15:00</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-300">Domingo</span>
+                                <span class="font-bold">Fechado</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-bold mb-4">Siga-nos</h4>
+                            <div class="flex gap-4">
+                                <a href="#" class="w-10 h-10 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange hover:bg-nexfy-orange hover:text-white transition-all">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://www.instagram.com/nexfy.solutions/" target="_blank" class="w-10 h-10 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange hover:bg-nexfy-orange hover:text-white transition-all">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange hover:bg-nexfy-orange hover:text-white transition-all">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-nexfy-orange bg-opacity-10 flex items-center justify-center text-nexfy-orange hover:bg-nexfy-orange hover:text-white transition-all">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="py-12 bg-nexfy-dark border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <a href="#" class="flex items-center mb-6">
+                        <div class="logo-container mr-3">
+                            <img src="https://i.imgur.com/TKBphET.png" alt="Nexfy Logo" class="logo-image">
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold"><span class="text-nexfy-orange">Nexfy</span> Solutions</h1>
+                            <p class="text-xs text-gray-400">Geração de Leads Inteligentes</p>
+                        </div>
+                    </a>
+                    <p class="text-gray-400 mb-6">
+                        Especialistas em geração de leads inteligentes e operação completa de ativação para escalar suas vendas.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Links Rápidos</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-nexfy-orange transition-colors">Home</a></li>
+                        <li><a href="#quem-somos" class="text-gray-400 hover:text-nexfy-orange transition-colors">Quem Somos</a></li>
+                        <li><a href="#servicos" class="text-gray-400 hover:text-nexfy-orange transition-colors">Serviços</a></li>
+                        <li><a href="#como-funciona" class="text-gray-400 hover:text-nexfy-orange transition-colors">Como Funciona</a></li>
+                        <li><a href="#resultados" class="text-gray-400 hover:text-nexfy-orange transition-colors">Resultados</a></li>
+                        <li><a href="#contato" class="text-gray-400 hover:text-nexfy-orange transition-colors">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Serviços</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#servicos" class="text-gray-400 hover:text-nexfy-orange transition-colors">Leads Qualificados</a></li>
+                        <li><a href="#servicos" class="text-gray-400 hover:text-nexfy-orange transition-colors">Operação de Ativação</a></li>
+                        <li><a href="#servicos" class="text-gray-400 hover:text-nexfy-orange transition-colors">Disparos no WhatsApp</a></li>
+                        <li><a href="#servicos" class="text-gray-400 hover:text-nexfy-orange transition-colors">SDRs e Atendimento com IA</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6">Contato</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-phone text-nexfy-orange"></i>
+                            <a href="tel:+5518997053072" class="text-gray-300 hover:text-nexfy-orange transition-colors">(18) 99705-3072</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-envelope text-nexfy-orange"></i>
+                            <a href="mailto:adm@nexfysolutions.com.br" class="text-gray-300 hover:text-nexfy-orange transition-colors">adm@nexfysolutions.com.br</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fas fa-map-marker-alt text-nexfy-orange"></i>
+                            <span class="text-gray-300">Rua Ribeiro de Barros 457, CEP 16200071</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 mb-4 md:mb-0">© 2023 Nexfy Solutions. Todos os direitos reservados.</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-gray-400 hover:text-nexfy-orange transition-colors">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="https://www.instagram.com/nexfy.solutions/" target="_blank" class="text-gray-400 hover:text-nexfy-orange transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-nexfy-orange transition-colors">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-nexfy-orange transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- WhatsApp Float Button - MODIFICADO: Usando um link direto para o número do WhatsApp -->
+    <a href="https://wa.me/5518997053072" target="_blank" class="fixed bottom-6 right-6 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl shadow-lg hover:bg-green-600 transition-all z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMenuButton = document.getElementById('close-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+        
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+        
+        // Mobile Menu Links
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const target = document.querySelector(this.getAttribute('href'));
+                
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form Submission
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+        
+        contactForm.addEventListener('submit', (e) => {
+            // Não previne o comportamento padrão para permitir o envio por mailto
+            // Mas mostra a mensagem de sucesso
+            formSuccess.classList.remove('hidden');
+            
+            setTimeout(() => {
+                formSuccess.classList.add('hidden');
+            }, 5000);
+        });
+        
+        // Scroll Animation
+        const observerOptions = {
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-10');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('section > div > div').forEach(el => {
+            el.classList.add('transition-all', 'duration-1000', 'opacity-0', 'translate-y-10');
+            observer.observe(el);
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'980329dce39e8b1e',t:'MTc1ODA1NTA2NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
